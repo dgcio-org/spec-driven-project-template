@@ -6,11 +6,6 @@
 #
 # 示例:
 #   ./project-init.sh my-data-pipeline ~/projects/my-data-pipeline
-#
-# 从 qiangsheng-org/spec-driven-project-template 初始化新项目。
-# 支持两种方式：
-#   1. 从 GitHub 克隆模板（在线）
-#   2. GitHub UI: Use this template
 
 set -e
 
@@ -20,7 +15,6 @@ TEMPLATE_REPO="https://github.com/qiangsheng-org/spec-driven-project-template.gi
 
 echo "=== 初始化项目: $PROJECT_NAME ==="
 
-# 克隆模板（浅克隆，不保留 git 历史）
 if git clone --depth 1 "$TEMPLATE_REPO" "$TARGET_DIR" 2>/dev/null; then
     echo "  -> 从 GitHub 模板仓库克隆"
 else
@@ -49,8 +43,16 @@ git commit -m "chore: init $PROJECT_NAME from spec-driven-project-template"
 echo ""
 echo "=== 项目初始化完成: $TARGET_DIR ==="
 echo ""
-echo "下一步："
-echo "  1. 创建 GitHub 仓库: gh repo create qiangsheng-org/$PROJECT_NAME --private"
-echo "  2. 推送: git remote add origin ... && git push -u origin main"
+echo "下一步:"
+echo "  1. 安装行为规范 skill（所有 Agent 通用，只需执行一次）:"
+echo "     hermes skills install spec-driven-development"
+echo ""
+echo "  2. 创建 GitHub 仓库:"
+echo "     gh repo create qiangsheng-org/$PROJECT_NAME --private"
+echo "     git remote add origin git@github.com:qiangsheng-org/$PROJECT_NAME.git"
+echo "     git push -u origin main"
+echo ""
 echo "  3. 编辑 docs/project-rules.md，填写项目特定规则"
-echo "  4. 开始第一个 spec"
+echo ""
+echo "  4. Agent 启动方式:"
+echo "     hermes -s spec-driven-development --workdir $TARGET_DIR"
