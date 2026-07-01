@@ -1,0 +1,33 @@
+name: Spec Validation
+
+on:
+  pull_request:
+    paths:
+      - 'specs/**'
+      - 'CHANGELOG.md'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check spec structure
+        run: |
+          # 检查 active spec 是否包含必需文件
+          for spec_dir in specs/active/*/; do
+            if [ -d "$spec_dir" ]; then
+              if [ ! -f "${spec_dir}proposal.md" ] && [ ! -f "${spec_dir}change-proposal.md" ]; then
+                echo "❌ $spec_dir 缺少 proposal.md 或 change-proposal.md"
+                exit 1
+              fi
+              echo "✅ $spec_dir 结构检查通过"
+            fi
+          done
+
+      - name: Check CHANGELOG updated
+        run: |
+          # 检查 CHANGELOG.md 是否在 PR 中被修改
+          if ! git diff --name-only origin/main...HEAD | grep -q "CHANGELOG.md"; then
+            echo "⚠️ CHANGELOG.md 未更新（如果变更涉及功能/修复，请更新）"
+          fi
