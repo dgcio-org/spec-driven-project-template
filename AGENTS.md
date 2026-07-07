@@ -8,29 +8,32 @@
 
 本项目采用 **Spec-Driven Development (SDD)**：先方案后代码，没讨论清楚不写代码。
 
-行为规范由 Hermes skill `spec-driven-development` 强制执行：
+行为规范由 [agent-scaffold](https://github.com/LucasGuoo/agent-scaffold) 提供标准化 skills：
 
 ```bash
-# Agent 启动时加载
-hermes -s spec-driven-development
+# 首次进入项目时安装（任一方式）
+# 方式一：agent-scaffold 安装脚本
+git clone https://github.com/LucasGuoo/agent-scaffold.git /tmp/agent-scaffold
+bash /tmp/agent-scaffold/platforms/qclaw/install.sh .
 
-# 或全局安装（推荐）
-hermes skills install spec-driven-development
+# 方式二：project-init.sh 自动处理
+bash project-init.sh <project-name> <target-dir>
 ```
 
-人类可读的完整说明见 [docs/workflow.md](docs/workflow.md)。
+> 人类可读的完整工作流说明见 [docs/workflow.md](docs/workflow.md)。
 
 ## 工具兼容性矩阵
 
 > 任何 Agent 启动时首先读取本节，了解自身在项目中的角色和能力边界。
 
-| 工具 | 角色 | 能力 | 限制 |
-|------|------|------|------|
-| Hermes (云端) | 主力 Agent | 全流程 spec→code→review、多 profile 协作 | 需网络连接 |
-| QClaw (本地) | 辅助 Agent | 文件操作、浏览器自动化、定时任务、MCP 工具 | 无直接代码执行权限 |
-| WorkBuddy (本地) | 实现 Agent | 代码编写、调试、本地测试 | 无 spec 管理能力 |
-| Claude Code (本地) | 实现 Agent | 代码编写、重构、文件操作 | 无项目级上下文记忆 |
-| GitHub Actions | CI/CD | 自动化测试、部署、spec 格式校验 | 无交互能力 |
+| 工具 | 类型 | 角色 | 能力 | Skills 路径 |
+|------|------|------|------|-------------|
+| QClaw | 本地 | 全能 Agent | spec→code→review、浏览器自动化、定时任务、MCP 工具 | `.agent/qclaw/skills/` |
+| WorkBuddy | 本地 | 实现 Agent | 代码编写、调试、文件操作 | `.agent/workbuddy/skills/` |
+| Claude Code | 本地 | 实现 Agent | 代码编写、重构、文件操作 | `.claude/skills/` |
+| Trae IDE | IDE | 实现 Agent | 代码编写、重构、VS Code 生态整合 | `.trae/skills/` |
+| Codex | 本地/云端 | 实现 Agent | 代码编写、审查、多工具编排 | `.codex/skills/` |
+| GitHub Actions | CI/CD | — | 自动化测试、部署、spec 格式校验 | — |
 
 > 初始化项目时，根据实际使用的工具编辑此表。删除未使用的行，添加新工具。
 
@@ -58,7 +61,7 @@ hermes skills install spec-driven-development
 | 架构决策 | docs/decisions/ADR-NNN.md |
 | 项目特定规则 | docs/project-rules.md |
 | Agent 角色定义 | docs/agent-profiles.md |
-| 项目专属技能 | skills/ |
+| Agent 行为 skills | 由 agent-scaffold 管理 |
 
 ## 快速开始
 

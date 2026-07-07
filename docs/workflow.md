@@ -1,7 +1,7 @@
 # 协作范式（人类参考）
 
-> **Agent 行为规范由 skill `spec-driven-development` 强制执行。**
-> 本文档是人类可读的参考说明。
+> **Agent 行为规范由 [agent-scaffold](https://github.com/LucasGuoo/agent-scaffold) skills 强制执行。**
+> 本文档是人类可读的参考说明。Agent 无需读取本文档，直接执行 agent-scaffold 中的对应 skill 即可。
 
 ## 核心原则
 
@@ -32,7 +32,7 @@
 6. **验收** — verdict.md
 7. **归档** — 移动 spec + 更新 CHANGELOG
 
-详细规则见 skill `spec-driven-development` 的 Rule 1-12。
+详细规则见 agent-scaffold 中对应 skill（如 `spec-proposal`、`spec-design`）的 SKILL.md。
 
 ### 轻量变更流程（Change Proposal）
 
@@ -171,6 +171,6 @@ specs/
 |----|------|------|
 | Org 治理 | qiangsheng-org/.github | CODE_OF_CONDUCT、CONTRIBUTING、Issue/PR 模板 |
 | 项目宪法 | docs/constitution.md | 不可违背的基本原则 |
-| 行为约束 | skill: spec-driven-development | 精确规则，Agent 强制执行 |
+| 行为约束 | agent-scaffold skills | 精确规则，Agent 强制执行 |
 | 项目骨架 | 本模板仓库 | specs/、CHANGELOG、ADR 目录 |
-| 项目个性 | docs/project-rules.md + skills/ | 项目特定规则和技能 |
+| 项目个性 | docs/project-rules.md | 项目特定规则 |

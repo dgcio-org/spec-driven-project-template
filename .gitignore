@@ -26,4 +26,11 @@ package-lock.json
 .DS_Store
 Thumbs.db
 
+# Agent scaffold install paths (agent-scaffold)
+.agent/
+.claude/
+.trae/
+.codex/
+.agent-scaffold.lock
+
 # Project-specific (add below)

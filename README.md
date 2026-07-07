@@ -21,6 +21,8 @@
 ├── CLAUDE.md → AGENTS.md        # 兼容 Claude Code
 ├── CHANGELOG.md                 # 变更记录（Keep a Changelog 格式）
 ├── CONTRIBUTING.md              # 贡献指南
+├── project-init.sh              # 项目初始化脚本（含 agent-scaffold 自动安装）
+├── .agent-scaffold.lock         # agent-scaffold 版本锁（初始化后生成）
 ├── .github/                     # GitHub 模板和 CI
 │   ├── PULL_REQUEST_TEMPLATE.md
 │   ├── ISSUE_TEMPLATE/
@@ -37,17 +39,15 @@
 │   │   └── change-proposal.md   # 轻量变更提案
 │   ├── active/                  # 进行中的 spec
 │   └── archive/                 # 已完成的 spec
-├── docs/
-│   ├── workflow.md              # 完整协作范式（含 Handoff Protocol）
-│   ├── constitution.md          # 项目宪法（不可违背的基本原则）
-│   ├── project-rules.md         # 项目特定规则（初始化后填写）
-│   ├── agent-profiles.md        # Agent 角色定义
-│   └── decisions/               # 架构决策记录（ADR）
-├── skills/                      # 项目专属 skills
-│   ├── README.md                # Skill 编写规范
-│   └── _template/               # Skill 模板
-└── project-init.sh              # 项目初始化脚本
+└── docs/
+    ├── workflow.md              # 完整协作范式（含 Handoff Protocol）
+    ├── constitution.md          # 项目宪法（不可违背的基本原则）
+    ├── project-rules.md         # 项目特定规则（初始化后填写）
+    ├── agent-profiles.md        # Agent 角色定义
+    └── decisions/               # 架构决策记录（ADR）
 ```
+
+> **注意**：`skills/` 目录已从此模板中移除。Agent 行为 skills 由独立的 [agent-scaffold](https://github.com/LucasGuoo/agent-scaffold) 仓库管理，通过 `project-init.sh` 自动安装，或手动安装到对应工具目录。
 
 ## 快速开始
 
@@ -98,9 +98,44 @@ GitHub → New Repository → "Repository template"
 - **GitHub Projects = Task Board** — tasks.md 的任务对应 Issue
 - **PR = Spec 实现** — PR title 引用 spec：`[SPEC-xxx] ...`
 
-## 与 Org 治理的关系
+## Agent Skills
 
-本模板由 `qiangsheng-org/.github` 仓库补充 Org 级规范（CODE_OF_CONDUCT、SECURITY、SUPPORT 等）。这些文件所有项目自动继承，不需要在模板中重复。
+本模板不内置 skills 文件。Agent 行为规范由 [agent-scaffold](https://github.com/LucasGuoo/agent-scaffold) 仓库提供，支持六大平台：
+
+| 平台 | Skills 路径 |
+|------|------------|
+| QClaw | `.agent/qclaw/skills/` |
+| WorkBuddy | `.agent/workbuddy/skills/` |
+| Claude Code | `.claude/skills/` |
+| Trae IDE | `.trae/skills/` |
+| Codex | `.codex/skills/` |
+
+`project-init.sh` 会自动检测当前环境中的 Agent 工具并安装对应平台版本。
+
+## 与 agent-scaffold 的关系
+
+```
+agent-scaffold (LucasGuoo)          spec-driven-project-template (qiangsheng-org)
+├── skills/                         ├── templates/ (spec 模板)
+│   ├── sdd-workflow/               ├── docs/ (项目治理)
+│   ├── spec-proposal/              ├── .github/ (CI)
+│   ├── spec-design/                └── project-init.sh (集成 agent-scaffold)
+│   ├── spec-tasks/
+│   ├── spec-implement/             Skills 管理 → agent-scaffold
+│   ├── spec-review/                项目骨架 → spec-driven-project-template
+│   ├── change-proposal/
+│   ├── handoff/
+│   ├── changelog-update/
+│   └── scaffold-manager/
+├── platforms/
+│   ├── qclaw/install.sh
+│   ├── workbuddy/install.sh
+│   ├── claude-code/install.sh
+│   ├── trae/install.sh
+│   ├── codex/install.sh
+│   └── generic/install.sh
+└── templates/ (spec 模板副本)
+```
 
 ## 参考
 
