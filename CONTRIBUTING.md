@@ -5,14 +5,14 @@
 本项目采用 **Spec-Driven Development**。在开始写代码前，请先阅读：
 
 - [AGENTS.md](AGENTS.md) — AI Agent 行为约定和工具兼容性矩阵
-- [docs/constitution.md](docs/constitution.md) — 项目宪法（不可违背的原则）
+- [docs/constitution.md](docs/constitution.md) — 项目宪法（DGCIO 数据工程规范）
 - [docs/workflow.md](docs/workflow.md) — 完整协作范式（含 Handoff Protocol）
 - [docs/agent-profiles.md](docs/agent-profiles.md) — Agent 角色定义
 
 ## 快速开始
 
 ```bash
-git clone git@github.com:qiangsheng-org/{{PROJECT_NAME}}.git
+git clone git@github.com:dgcio-org/{{PROJECT_NAME}}.git
 cd {{PROJECT_NAME}}
 ```
 
